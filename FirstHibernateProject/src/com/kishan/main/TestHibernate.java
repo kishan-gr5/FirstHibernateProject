@@ -21,12 +21,12 @@ public class TestHibernate
 		Address addr = new Address();
 		addr.setStreet("yelahanka");
 		addr.setCity("bangalore");
-		user.setHomeAddress(addr);
+		user.getListOfAddress().add(addr);
 		
 		Address addr2 = new Address();
-		addr.setStreet("new bel");
-		addr.setCity("bangalore");
-		user.setOfficeAddress(addr2);
+		addr2.setStreet("new bel");
+		addr2.setCity("bangalore");
+		user.getListOfAddress().add(addr2);
 		
 		SessionFactory sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
 		Session session = sessionFactory.openSession();
@@ -36,14 +36,5 @@ public class TestHibernate
 		System.out.println("success");
 		session.close();
 		
-		user = null;
-		session = sessionFactory.openSession();
-		session.beginTransaction();
-		user =(UserDetails)session.get(UserDetails.class,1);
-		System.out.println("username retrieved is:"+ user.getUserName());
-	
-		System.out.println("username retrieved is:"+ user.getJoinedDate());
-		System.out.println("successfully retrieved");
-		session.close();
 	}
 }
